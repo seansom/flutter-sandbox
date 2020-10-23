@@ -10,16 +10,30 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Sandbox()
+        home: Home()
     );
   }
 }
+
+
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Sandbox(),
+      ),
+    );
+  }
+}
+
 
 
 class Sandbox extends StatefulWidget {
   @override
   _SandboxState createState() => _SandboxState();
 }
+
 
 // Sample Animated Column Widget
 class _SandboxState extends State<Sandbox> {
@@ -31,54 +45,48 @@ class _SandboxState extends State<Sandbox> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
 
-        // 1. Wrap the widget to be animated in an AnimatedFOO container
-        child: AnimatedContainer(
+    // 1. Wrap the widget to be animated in an AnimatedFOO container
+    return AnimatedContainer(
 
-          // 2. Set the duration of all animations
-          duration: Duration(milliseconds: 1000),
+      // 2. Set the duration of all animations
+      duration: Duration(milliseconds: 900),
 
-          // 3. Optional: set the transition timings of animations
-          curve: Curves.easeIn,
+      // 3. Optional: set the transition timings of animations
+      curve: Curves.easeIn,
 
-          // Set properties to be animated
-          // Note: these properties should have initial values set in the State
-          height: _height,
-          width: _width,
-          color: _color,
+      // Set properties to be animated
+      // Note: these properties should have initial values set in the State
+      height: _height,
+      width: _width,
+      color: _color,
 
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
 
-            children: <Widget>[
-              Text('Hello World'),
+        children: <Widget>[
+          Text('Hello World!'),
+          RaisedButton(
+            child: Text('Wow!'),
+            onPressed: () {
 
-              RaisedButton(
-                child: Text('Animate!'),
-                onPressed: () {
-                  // 5. Change state properties and animations occur automatically!
-                  setState(() {
-                    if(_color == Colors.blue) {
-                      _height = 160;
-                      _width = 320;
-                      _color = Colors.green;
-                    } else {
-                      _height = 80;
-                      _width = 160;
-                      _color = Colors.blue;
-                    }
-                  });
-                },
-              )
-
-            ],
-          ),
-        ),
+              // 5. Change state properties and animations occur automatically!
+              setState(() {
+                if(_color == Colors.blue) {
+                  _height = 160;
+                  _width = 320;
+                  _color = Colors.green;
+                } else {
+                  _height = 80;
+                  _width = 160;
+                  _color = Colors.blue;
+                }
+              });
+            },
+          )
+        ],
       ),
     );
   }
 }
-
